@@ -31,10 +31,8 @@ dependencies {
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.flywaydb:flyway-core")
-
-	compileOnly("org.mapstruct:mapstruct:1.4.1.Final")
-	compileOnly("org.mapstruct:mapstruct-jdk8:1.4.1.Final")
-	compileOnly("org.mapstruct:mapstruct-processor:1.4.1.Final")
+	implementation("org.mapstruct:mapstruct-jdk8:1.3.1.Final")
+	implementation("org.mapstruct:mapstruct-processor:1.3.1.Final")
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("mysql:mysql-connector-java")

@@ -10,5 +10,5 @@ data class Limite(@Id
              val id: Long,
              @Column(name = "code_cliente") val codeCliente: String,
              @Column(name = "quantidade_saques") val quantidadeSaques: Long,
-             @Column(name = "quantidade_transferencia") val quantidadeTrans: Long,
-             @Column(name = "volumeDiario") val volumeDiario: BigDecimal)
+             @Column(name = "quantidade_transferencia") val quantidadeTransf: Long,
+             @Column(name = "volume_diario") val volumeDiario: BigDecimal)
