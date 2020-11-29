@@ -6,5 +6,5 @@ import java.util.*
 
 interface LimiteRepository : JpaRepository<Limite, Long> {
 
-    fun findByCode(code: String) : Optional<Limite>
+    fun findByCodeCliente(code: String) : Optional<Limite>
 }

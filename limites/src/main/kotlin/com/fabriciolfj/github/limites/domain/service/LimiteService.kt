@@ -6,12 +6,15 @@ import com.fabriciolfj.github.limites.api.exceptions.LimiteNotFoundException
 import com.fabriciolfj.github.limites.api.mapper.LimiteMapper
 import com.fabriciolfj.github.limites.domain.entity.Limite
 import com.fabriciolfj.github.limites.domain.repository.LimiteRepository
+import org.slf4j.LoggerFactory
 import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class LimiteService {
+
+    var log = LoggerFactory.getLogger(LimiteService::class.java)
 
     @Autowired
     lateinit var limiteRepository: LimiteRepository
@@ -24,24 +27,27 @@ class LimiteService {
     }
 
     fun findByCode(code: String) : LimiteResponse {
-        return limiteRepository.findByCode(code)
+        return limiteRepository.findByCodeCliente(code)
                 .map { mapper.toResponse(it) }
                 .orElseThrow{ LimiteNotFoundException("Limite não encontrado para o cliente: $code")}
     }
 
     fun delete(code: String) {
-        limiteRepository.findByCode(code)
+        limiteRepository.findByCodeCliente(code)
                 .map { limiteRepository.delete(it) }
                 .orElseThrow{ LimiteNotFoundException("Limite não encontrado para o cliente: $code")}
     }
 
     fun findAll() : List<LimiteResponse> {
         return limiteRepository.findAll()
-                .map { mapper.toResponse(it) }
+                .map {
+                    log.info(it.toString())
+                    mapper.toResponse(it)
+                }
     }
 
     fun update(limiteRequest: LimiteRequest, code: String) : LimiteResponse {
-        return limiteRepository.findByCode(code)
+        return limiteRepository.findByCodeCliente(code)
                 .map {
                     BeanUtils.copyProperties(toEntity(limiteRequest), it, "id")
                     limiteRepository.save(it)

@@ -5,8 +5,9 @@ import com.fabriciolfj.github.limites.api.dto.response.LimiteResponse
 import com.fabriciolfj.github.limites.domain.entity.Limite
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
+import org.mapstruct.ReportingPolicy
 
-@Mapper(componentModel = "string")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 interface LimiteMapper {
 
     @Mapping(target = "id", ignore = true)

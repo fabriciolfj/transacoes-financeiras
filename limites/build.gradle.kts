@@ -3,8 +3,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.4.0"
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
+	id("org.jetbrains.kotlin.plugin.noarg") version "1.4.10" apply true
+	id("org.jetbrains.kotlin.plugin.jpa") version "1.4.10" apply true
 	kotlin("jvm") version "1.4.10"
 	kotlin("plugin.spring") version "1.4.10"
+	kotlin("kapt") version "1.4.10"
 }
 
 group = "com.fabriciolfj.github"
@@ -31,10 +34,14 @@ dependencies {
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.flywaydb:flyway-core")
-	implementation("org.mapstruct:mapstruct-jdk8:1.3.1.Final")
-	implementation("org.mapstruct:mapstruct-processor:1.3.1.Final")
+	implementation(kotlin("stdlib-jdk8"))
+	implementation("org.mapstruct:mapstruct:1.4.1.Final")
+	kapt("org.mapstruct:mapstruct-processor:1.4.1.Final")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
 	compileOnly("org.projectlombok:lombok")
+
 	runtimeOnly("mysql:mysql-connector-java")
 
 	annotationProcessor("org.projectlombok:lombok")
